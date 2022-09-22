@@ -1,11 +1,11 @@
 import { Router } from "express";
-import { UsuarioController } from "../controllers";
-import { Usuario } from "../interfaces";
-import { returnErrorCamposNoValidos } from "../middlewares";
+import { UsuarioController } from "../../controllers";
+import { Usuario } from "../../interfaces";
+import { returnErrorCamposNoValidos } from "../../middlewares";
 import {
     campoValidosAddUser,
     validarCamposAddUsuario,
-} from "../middlewares/validators";
+} from "../../middlewares/validators";
 
 const router: Router = Router();
 
