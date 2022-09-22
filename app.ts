@@ -1,24 +1,19 @@
-import express, { Application, Router } from "express";
+import express, { Application } from "express";
 import cors from "cors";
 import { Enviroments } from "./config";
-import { runSeed } from "./config/seed";
-import { UsuarioRouters } from "./routers";
+import { v1, v2 } from "./routers";
 
 /* Starting Application */
 const app: Application = express();
-const router: Router = Router();
+
 
 /* Middlewares */
 app.use(express.json({}));
 app.use(cors());
 
-/* ROUTERS */
-router.use("/usuario", UsuarioRouters);
-// router.use("/productos", );
-router.get("/seed", runSeed);
-
-/* Router Api */
-app.use("/api", router);
+/* Routera Api */
+app.use("/api/v1", v1.default);
+app.use("/api/v2", v2.default);
 
 /* Running PORT */
 const puerto = Enviroments.port;
