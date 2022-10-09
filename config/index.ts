@@ -1,3 +1,3 @@
-// export * from "./db";
 export * from "./env.config";
-export * as db from "./db";
+export * from "./db";
+export * from "./cors";

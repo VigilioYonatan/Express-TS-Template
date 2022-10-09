@@ -11,6 +11,8 @@
         "strict": true /* Enable all strict type-checking options. */,
         "noImplicitAny": true /* Enable error reporting for expressions and declarations with an implied 'any' type. */,
         "noUnusedParameters": true /* Raise an error when a function parameter isn't read. */,
-        "skipLibCheck": true /* Skip type checking all .d.ts files. */
-    }
+        "skipLibCheck": true /* Skip type checking all .d.ts files. */,
+        "types": ["node"]
+    },
+    "exclude": ["./logs"]
 }

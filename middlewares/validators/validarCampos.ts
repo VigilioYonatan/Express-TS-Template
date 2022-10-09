@@ -1,5 +1,6 @@
 import { validationResult, body } from "express-validator";
 import { Request, Response, NextFunction } from "express";
+import { join } from "path";
 
 const validar = (
     req: Request,
@@ -17,10 +18,27 @@ const validar = (
     next();
 };
 
-const expressValidationTyped = <T extends string>() => {
+const returnErrorCamposNoValidos = <T extends Object>(
+    array: Array<keyof T | string>
+) => {
+    return async (req: Request, res: Response, next: NextFunction) => {
+        const { ...rest } = req.body as T;
+        const data = Object.keys(rest);
+        for (const dat of data) {
+            if (!array.includes(dat)) {
+                const error = new Error(
+                    `Campos no permitidos: ${dat} - [${array.join("-")}]`
+                );
+                return res.status(401).json({ msg: error.message });
+            }
+        }
+        next();
+    };
+};
+const expressValidationTyped = <T extends object>() => {
     return {
-        body: (a?: T, b?: string) => body(a, b),
+        body: (a?: keyof T, b?: string) => body(a as string, b),
     };
 };
 
-export { validar, expressValidationTyped };
+export { validar, returnErrorCamposNoValidos, expressValidationTyped };
